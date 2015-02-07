@@ -1,0 +1,71 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+.edit_button,.save_button,.dont_save_button,delete_button{
+    background-repeat:no-repeat;
+    border:none;
+    padding:0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    position: absolute; z-index: 1002;
+}
+.edit_button{
+    background: url('../icons/icon_edit.png');
+}
+
+.save_button{
+    background: url('../icons/icon_save.png');
+}
+
+.dont_save_button{
+    background: url('../icons/icon_dont_save.png');
+}
+.delete_button{
+	background: url('../icons/icon_delete.png');
+}
+
+.fullhappy_light_box_fade{
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #aaa;
+	z-index: 1001;
+	-moz-opacity: 0.5;
+	opacity: .50;
+	filter: alpha(opacity = 50);
+}
+
+.fullhappy_light_box_light{
+	position: absolute;
+	box-shadow:0 0 6px #000000;
+	width: 400px;
+	height: 200px;
+	padding: 16px;
+	background-color: white;
+	z-index: 1002;
+	border-radius: 4px;
+}
+
+.fullhappy_box_fade{
+	background-color: #aaa;
+	z-index: 1001;
+	-moz-opacity: 0.5;
+	opacity: .50;
+	filter: alpha(opacity = 50);
+}
+
+.fullhappy_box_shadow_orange{
+	box-shadow:0 0 6px orange;
+}
+.box_shadow_orange{
+	box-shadow:0 0 6px orange;
+}
+.box_shadow{
+	box-shadow:0 0 6px #000;
+}

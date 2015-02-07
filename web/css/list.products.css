@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 1, 2015, Feb 1, 2015 11:58:53 PM
+    Author     : AAAA
+*/
+
+.item_container,
+.item_container .item_image_container, 
+.item_container .item_image_container img,
+.item_container .item_title,
+.item_container .item_price{
+    width: 100%;
+    overflow-x: hidden;  
+    cursor: pointer;
+}
+.item_container{
+    margin-bottom: 40px;
+}
+
+.item_container .item_title,
+.item_container .item_price{
+    text-align: center;
+    min-height: 30px;
+}
+
+.item_container .item_image_container{
+    background-size: cover;
+    height: 292px;
+    overflow-y: hidden; 
+}
+.item_container .item_image_container img{
+    transition: ease-in-out opacity 0.5s;
+}
+
+.item_container .item_image_container img:hover{
+    opacity: 0;
+    width: 100%;
+}

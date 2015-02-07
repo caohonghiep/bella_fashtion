@@ -1,0 +1,33 @@
+.contact_info{
+    padding: 20px;
+    height: 200px;
+    font-size: 13px;
+    background-color: rgba(242, 242, 242,0.5);
+}
+
+.contact_info .company_title {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333333;
+    text-shadow: 1px 1px 2px #D0D0D0;
+    height: 30px;
+    text-align: center;
+}
+
+.contact_info .contact_label,.contact_info .value {
+    float: left;
+    min-height: 20px;
+    vertical-align: middle;
+}
+
+.contact_info .contact_label {
+    font-weight: bold;
+    width: 20%;
+    text-align: right;
+}
+
+.contact_info .value {
+    width: 80%;
+    padding-left: 10px;
+}

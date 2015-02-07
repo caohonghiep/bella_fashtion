@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 1, 2015, Feb 1, 2015 11:04:47 PM
+    Author     : AAAA
+*/
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { ... }
+
+.text-strong{
+    font-weight: bold;
+}
+.breadcrumb{
+    background: none;
+    /*padding-left:0;*/
+    margin-bottom: 0px;
+}
+.footer{
+    clear: both;
+}
+/*
+.list-group-item:hover{
+    cursor: pointer;
+}*/

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>Justified Nav Template for Bootstrap</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="./lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="./lib/customize.bootstrap/justified-nav.css" rel="stylesheet">
+
+        <!-- Custom Bootstrap-->
+        <link href="./lib/customize.bootstrap/style.css" rel="stylesheet">
+
+        <link href="./css/contact.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="./lib/jquery/jquery-2.1.3.js"></script>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+           <div class="masthead">
+                <h2 class="logo text-muted text-center text-uppercase text-strong">Bella Fashion</h2>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li id="menu_home"><a href="http://localhost:8080/bebe3">TRANG CHỦ</a></li>
+                        <li id="menu_in_new"><a href="http://localhost:8080/bebe3/products.html">HÀNG MỚI VỀ</a></li>
+                        <li id="menu_products"><a href="http://localhost:8080/bebe3/products.html">SẢN PHẨM​</a></li>
+                        <li><a href="#">PHỤ KIỆN</a></li>
+                        <li id="menu_sale_off"><a href="http://localhost:8080/bebe3/products.html">KHUYẾN MẠI</a></li>
+                        <li id="menu_contact"><a href="http://localhost:8080/bebe3/contact.html">LIÊN HỆ</a></li>
+                        <!--<li><a href="#">Contact</a></li>-->
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Example row of columns -->
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Library</a></li>
+                <li>Data</li>
+            </ol>
+            <div id="detail_container">
+                <div style="padding: 4px;border: 1px solid #E9E9E9;height: 420px">
+                    <div id="map-canvas" style="width: 100%;height: 100%"></div>
+                </div>
+                <ol class="breadcrumb">
+                    <li>&nbsp;</li>
+                </ol>
+                <div class="row">
+                    <div class="col-lg-6">           
+                        <div class="contact_info">
+                            <div class="company_title" onEdit="updateItem">Bella Fashion</div>
+                            <div class="contact_label">Địa Chỉ:</div> 
+                            <div class="value editable" onEdit="updateItem">36 Phan Huy Thực, Phường Tân Kiểng, Q​uận 7, TP.HCM</div>
+                            <div class="contact_label">Hotline:</div>
+                            <div class="value editable" onEdit="updateItem">09​3​3903123 (Zalo & Viber & facebook)</div>
+                            <div class="contact_label">Website:</div> 
+                            <div class="value editable" onEdit="updateItem">www.womanfashion.vn</div>
+                            <div class="contact_label">Email:</div>
+                            <div class="value editable" onEdit="updateItem">womanfashion123@gmail.com</div>
+                            <div class="contact_label" >Facebook:</div>
+                            <div class="value editable" onEdit="updateItem">gsd</div>
+                            <div class="contact_label">Google+: </div>
+                            <div class="value editable" onEdit="updateItem">dgsd</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6"> 
+                        <div class="contact_info">
+                            <div class="company_title" onEdit="updateItem">Chế độ khách sỉ</div>
+                            <div style="padding-left: 10px;padding-right: 10px;" onEdit="updateItem">
+                                - Chiết khấu 45%: cho KH lần đầu tiên, mua từ 10 SP trở lên, lần thứ 2 KH mua ít nhất là 2SP cũng được tính giá sỉ.<br/>
+                                <br/>
+                                - Chiết khấu 50%: cho KH lần đầu tiên, mua từ 30 SP trở lên, lần thứ 2 KH mua ít nhất 10SP cũng được tính giá sỉ.<br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>    
+            <!-- Site footer -->
+            <footer class="footer">
+                <p>&copy; Company 2014</p>
+            </footer>
+
+
+        </div> <!-- /container -->
+        <script src="./lib/bootstrap/js/bootstrap.js"></script>
+        <script src="./lib/bootbox/bootbox.js"></script>
+        <script src="./lib/customize.bootstrap/script.js"></script>
+        <script src='lib/elevatezoom.master/jquery.elevatezoom.js'></script>
+        <script src="lib/on.edit.event/js/on.edit.js"></script>
+        <script src="./js/js.js"></script>
+        <script>
+            function updateItem() {
+                alert('updateItem');
+            }
+
+            <script src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" ></script>
+        <script>
+
+                    function initialize() {
+                        var myLatlng = new google.maps.LatLng(10.747496022090049, 106.70900330435188);
+                        var myLatlng1 = new google.maps.LatLng(10.748432778263198, 106.70900330435188);
+                        var mapOptions = {
+                            zoom: 16,
+                            center: myLatlng1,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        }
+                        var map = new google.maps.Map(
+                                document.getElementById('map-canvas'), mapOptions);
+
+                        var marker = new google.maps.Marker({
+                            position: myLatlng,
+                            map: map,
+                            title: 'Hello World!',
+                            draggable: true
+                        });
+                        google.maps.event.addListener(marker, 'dragend', function (event) {
+                            var position = event.latLng;
+
+                            //alert('Latitude: ' + position.lat() + '\n\rLongitude: ' + position.lng());
+                        });
+                    }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </script>
+</body>
+</html>

@@ -18,7 +18,7 @@
 
         <!-- Custom Bootstrap-->
         <link href="./lib/customize.bootstrap/style.css" rel="stylesheet">
-
+        <link href="css/css.css" rel="stylesheet" type="text/css" />
         <link href="./css/contact.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,26 +30,13 @@
         <style>
 
         </style>
+        <script src="/js/js.js"></script>
     </head>
 
     <body>
 
         <div class="container">
-
-           <div class="masthead">
-                <h2 class="logo text-muted text-center text-uppercase text-strong">Bella Fashion</h2>
-                <nav>
-                    <ul class="nav nav-justified">
-                        <li id="menu_home"><a href="http://localhost:8080/bebe3">TRANG CHỦ</a></li>
-                        <li id="menu_in_new"><a href="http://localhost:8080/bebe3/products.html">HÀNG MỚI VỀ</a></li>
-                        <li id="menu_products"><a href="http://localhost:8080/bebe3/products.html">SẢN PHẨM​</a></li>
-                        <li><a href="#">PHỤ KIỆN</a></li>
-                        <li id="menu_sale_off"><a href="http://localhost:8080/bebe3/products.html">KHUYẾN MẠI</a></li>
-                        <li id="menu_contact"><a href="http://localhost:8080/bebe3/contact.html">LIÊN HỆ</a></li>
-                        <!--<li><a href="#">Contact</a></li>-->
-                    </ul>
-                </nav>
-            </div>
+            <div id="masthead" class="masthead"></div>
 
             <!-- Example row of columns -->
             <ol class="breadcrumb">
@@ -108,40 +95,37 @@
         <script src="./lib/customize.bootstrap/script.js"></script>
         <script src='lib/elevatezoom.master/jquery.elevatezoom.js'></script>
         <script src="lib/on.edit.event/js/on.edit.js"></script>
-        <script src="./js/js.js"></script>
+        <script src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" ></script>
         <script>
             function updateItem() {
                 alert('updateItem');
             }
 
-            <script src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" ></script>
-        <script>
 
-                    function initialize() {
-                        var myLatlng = new google.maps.LatLng(10.747496022090049, 106.70900330435188);
-                        var myLatlng1 = new google.maps.LatLng(10.748432778263198, 106.70900330435188);
-                        var mapOptions = {
-                            zoom: 16,
-                            center: myLatlng1,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        }
-                        var map = new google.maps.Map(
-                                document.getElementById('map-canvas'), mapOptions);
+            function initialize() {
+                var myLatlng = new google.maps.LatLng(10.747496022090049, 106.70900330435188);
+                var myLatlng1 = new google.maps.LatLng(10.748432778263198, 106.70900330435188);
+                var mapOptions = {
+                    zoom: 16,
+                    center: myLatlng1,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(
+                        document.getElementById('map-canvas'), mapOptions);
 
-                        var marker = new google.maps.Marker({
-                            position: myLatlng,
-                            map: map,
-                            title: 'Hello World!',
-                            draggable: true
-                        });
-                        google.maps.event.addListener(marker, 'dragend', function (event) {
-                            var position = event.latLng;
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: 'Hello World!',
+                    draggable: true
+                });
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+                    var position = event.latLng;
 
-                            //alert('Latitude: ' + position.lat() + '\n\rLongitude: ' + position.lng());
-                        });
-                    }
+                    //alert('Latitude: ' + position.lat() + '\n\rLongitude: ' + position.lng());
+                });
+            }
             google.maps.event.addDomListener(window, 'load', initialize);
         </script>
-    </script>
-</body>
+    </body>
 </html>

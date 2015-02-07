@@ -18,7 +18,7 @@
 
         <!-- Custom Bootstrap-->
         <link href="./lib/customize.bootstrap/style.css" rel="stylesheet">
-
+        <link href="css/css.css" rel="stylesheet" type="text/css" />
         <link href="./css/detail.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,25 +39,41 @@
                 width: 20%;
             }
         </style>
+        <script src="/js/js.js"></script>
+        <script>
+            function updateItem() {
+                alert('updateItem');
+            }
+
+            jQuery("body").on("click", ".image_thumbnail", function (event) {
+                var srcDisplay = jQuery(this).attr('srcDisplay');
+                var srcZoom = jQuery(this).attr('srcZoom');
+                jQuery('#image_display').attr('src', srcDisplay);
+                jQuery('#image_display').attr('srcZoom', srcZoom);
+                jQuery('#image_display').attr('data-zoom-image', srcZoom);
+                jQuery('#image_display_content').css('background-image', ' url(\'' + jQuery(this).attr('src') + '\')');
+                jQuery('.zoomWindowContainer > div').css('background-image', ' url(\'' + srcZoom + '\')');
+            });
+
+            $('#image_display').elevateZoom({
+//              zoomType: "inner",
+                cursor: "crosshair",
+                zoomWindowFadeIn: 500,
+                zoomWindowFadeOut: 750,
+                zoomWindowOffetx: 10,
+                zoomWindowOffety: -1,
+                borderSize: 1,
+                zoomWindowHeight: 497,
+                zoomWindowWidth: 497
+            });
+        </script>
     </head>
 
     <body>
 
         <div class="container">
 
-            <div class="masthead">
-                <h2 class="logo text-muted text-center text-uppercase text-strong">Bella Fashion</h2>
-                <nav>
-                    <ul class="nav nav-justified">
-                        <!--<li class="active"><a href="#">TRANG CHỦ</a></li>-->
-                        <li><a href="#">HÀNG MỚI VỀ</a></li>
-                        <li><a href="#">SẢN PHẨM​</a></li>
-                        <li class="active"><a href="#">KHUYẾN MẠI</a></li>
-                        <li><a href="#">LIÊN HỆ</a></li>
-                        <!--<li><a href="#">Contact</a></li>-->
-                    </ul>
-                </nav>
-            </div>
+            <div id="masthead" class="masthead"></div>
 
             <!-- Example row of columns -->
             <ol class="breadcrumb">
@@ -194,34 +210,9 @@
         <script src="./lib/bootbox/bootbox.js"></script>
         <script src="./lib/customize.bootstrap/script.js"></script>
         <script src='lib/elevatezoom.master/jquery.elevatezoom.js'></script>
+
         <script src="js/detail.js"></script>
         <script src="lib/on.edit.event/js/on.edit.js"></script>
-        <script>
-            function updateItem() {
-                alert('updateItem');
-            }
 
-            jQuery("body").on("click", ".image_thumbnail", function (event) {
-                var srcDisplay = jQuery(this).attr('srcDisplay');
-                var srcZoom = jQuery(this).attr('srcZoom');
-                jQuery('#image_display').attr('src', srcDisplay);
-                jQuery('#image_display').attr('srcZoom', srcZoom);
-                jQuery('#image_display').attr('data-zoom-image', srcZoom);
-                jQuery('#image_display_content').css('background-image', ' url(\'' + jQuery(this).attr('src') + '\')');
-                jQuery('.zoomWindowContainer > div').css('background-image', ' url(\'' + srcZoom + '\')');
-            });
-
-            $('#image_display').elevateZoom({
-//              zoomType: "inner",
-                cursor: "crosshair",
-                zoomWindowFadeIn: 500,
-                zoomWindowFadeOut: 750,
-                zoomWindowOffetx: 10,
-                zoomWindowOffety: -1,
-                borderSize: 1,
-                zoomWindowHeight: 497,
-                zoomWindowWidth:497
-            });
-        </script>
     </body>
 </html>

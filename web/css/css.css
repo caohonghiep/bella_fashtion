@@ -1,0 +1,14 @@
+body{
+    text-shadow: 1px 1px 1px rgba(119, 119, 119,0.5);
+}
+/*header menu{*/
+.logo {
+    margin: 30px 0 40px 0;  
+}
+#masthead{
+    opacity: 0;
+    transition: opacity 1s;
+     transition-timing-function: ease-in-out;
+    height: 124px;
+}
+/*}header menu*/

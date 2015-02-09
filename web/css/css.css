@@ -8,7 +8,32 @@ body{
 #masthead{
     opacity: 0;
     transition: opacity 1s;
-     transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
     height: 124px;
 }
 /*}header menu*/
+
+
+.item_image_container .new{
+    width: 55px;
+    height: 29px;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background-image: url('../images/new.png'); 
+    background-repeat: no-repeat;
+}
+.item_image_container .safe_off{
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    top: 20px;
+    left: -5px;
+    /* background-color: rgba(255, 229, 0, 0.2); */
+    transform: rotate(-45deg);
+    text-align: center;
+    /* padding-top: 30px; */
+    /* box-shadow: 0 0 5px #333; */
+    color: red;
+    font-weight: bold;
+}

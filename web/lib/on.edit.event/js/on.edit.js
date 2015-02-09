@@ -177,6 +177,17 @@ Support.getOffset=function( el ) {
 // function Support()
 
 Support.loadStyle('lib/on.edit.event/css/on.edit.css');
+
+Support.enableScroll = function() {
+    document.documentElement.style.overflow = 'auto';  // firefox, chrome
+    document.body.scroll = "yes"; // ie only
+};
+
+Support.disableScroll = function() {
+    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+    document.body.scroll = "no"; // ie only
+};
+
 function Client() {
 }
 Client.createEditButton = function (node) {
@@ -189,9 +200,10 @@ Client.createEditButton = function (node) {
 
     var editButton = jQuery('<div class="edit_button" title="edit"></div>');
     editButton.attr('style', 'top:'
-            + (top + 2) + 'px; left: ' + (left + width - 18) + 'px;');
+            + (top + 2 + window.scrollY) + 'px; left: ' + (left + width - 18) + 'px;');
     jQuery(node).addClass('box_shadow_orange');
     jQuery(editButton).click(function (e) {
+        Support.disableScroll();
         Client.removeEditBotton(node);
         if (node.tagName === 'IMG') {
             Client.enableEditImage(node);
@@ -305,8 +317,9 @@ Client.createSaveButton = function (lightOverlay, node) {
 
     var saveButton = jQuery('<div class="save_button" title="save"></div>');
     saveButton.attr('style', 'top:'
-            + (top + 2) + 'px; left: ' + (left + width - 40) + 'px;');
+            + (top + 2 + window.scrollY) + 'px; left: ' + (left + width - 40) + 'px;');
     jQuery(saveButton).click(function (e) {
+        Support.enableScroll();
         var text = lightOverlay.innerHTML;
         text = text.trim();
         if (text.isLastString('<BR>') || text.isLastString('<br>')) {
@@ -337,8 +350,9 @@ Client.createDontSaveButton = function (node) {
 
     var dontSaveButton = jQuery('<div class="dont_save_button" title="don\'t save"></div>');
     dontSaveButton.attr('style', 'top:'
-            + (top + 2) + 'px; left: ' + (left + width - 20) + 'px;');
+            + (top + 2 + window.scrollY) + 'px; left: ' + (left + width - 20) + 'px;');
     jQuery(dontSaveButton).click(function (e) {
+        Support.enableScroll();
         var cancelEditAction = jQuery(node).attr('cancelEdit');
         if (cancelEditAction !== undefined && cancelEditAction !== null && cancelEditAction !== '') {
             eval(cancelEditAction + '(node)');

@@ -31,9 +31,11 @@ and open the template in the editor.
     background-size: cover;
     height: 292px;
     overflow-y: hidden; 
+    background-image: url(../images/load-icon.gif);
+    background-position:center center; 
 }
 .item_container .item_image_container img{
-    transition: ease-in-out opacity 0.5s;
+    transition: ease-in-out opacity 0.5s, ease-in-out display 0.5s;
 }
 
 .item_container .item_image_container img:hover{

@@ -24,7 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "site_info")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SiteInfo.findAll", query = "SELECT s FROM SiteInfo s")})
+    @NamedQuery(name = "SiteInfo.findAll", query = "SELECT s FROM SiteInfo s"),
+    @NamedQuery(name = "SiteInfo.findById", query = "SELECT s FROM SiteInfo s WHERE s.id = :id"),
+    @NamedQuery(name = "SiteInfo.findByWesiteName", query = "SELECT s FROM SiteInfo s WHERE s.wesiteName = :wesiteName"),
+    @NamedQuery(name = "SiteInfo.findByEmail", query = "SELECT s FROM SiteInfo s WHERE s.email = :email"),
+    @NamedQuery(name = "SiteInfo.findByPhone", query = "SELECT s FROM SiteInfo s WHERE s.phone = :phone"),
+    @NamedQuery(name = "SiteInfo.findByAdsress", query = "SELECT s FROM SiteInfo s WHERE s.adsress = :adsress"),
+    @NamedQuery(name = "SiteInfo.findByLocation", query = "SELECT s FROM SiteInfo s WHERE s.location = :location"),
+    @NamedQuery(name = "SiteInfo.findByLogoUrl", query = "SELECT s FROM SiteInfo s WHERE s.logoUrl = :logoUrl")})
 public class SiteInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -184,7 +191,7 @@ public class SiteInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "org.fullhappy.entity.SiteInfo[ id=" + id + " ]";
+        return "org.fullhappy.entities.SiteInfo[ id=" + id + " ]";
     }
     
 }

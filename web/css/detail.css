@@ -58,7 +58,7 @@
     margin-bottom: 10px;
 }
 
-.item_description{
+#item_description{
     padding-right: 10px;
     font-size: 11px;
     max-height: 210px; 
@@ -67,7 +67,7 @@
     border: 1px solid rgb(208, 208, 208);
     padding: 20px;*/
 }
-.item_description:hover{
+#item_description:hover{
     /*overflow-y: scroll;*/
 }
 #item_policy{

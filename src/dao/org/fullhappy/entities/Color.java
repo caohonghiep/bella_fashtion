@@ -6,15 +6,25 @@
 package org.fullhappy.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -24,21 +34,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "color")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Color.findAll", query = "SELECT c FROM Color c")})
+    @NamedQuery(name = "Color.findAll", query = "SELECT c FROM Color c"),
+    @NamedQuery(name = "Color.findById", query = "SELECT c FROM Color c WHERE c.id = :id"),
+    @NamedQuery(name = "Color.findByItemId", query = "SELECT c FROM Color c WHERE c.itemId = :itemId")})
 public class Color implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Lob
-    @Column(name = "urls")
-    private String urls;
-    @Basic(optional = false)
     @Column(name = "item_id")
     private long itemId;
-
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name="color_id")
+    List<Image> images;
     public Color() {
     }
 
@@ -46,9 +57,8 @@ public class Color implements Serializable {
         this.id = id;
     }
 
-    public Color(Long id, String urls, long itemId) {
+    public Color(Long id, long itemId) {
         this.id = id;
-        this.urls = urls;
         this.itemId = itemId;
     }
 
@@ -60,20 +70,20 @@ public class Color implements Serializable {
         this.id = id;
     }
 
-    public String getUrls() {
-        return urls;
-    }
-
-    public void setUrls(String urls) {
-        this.urls = urls;
-    }
-
     public long getItemId() {
         return itemId;
     }
 
     public void setItemId(long itemId) {
         this.itemId = itemId;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @Override
@@ -98,7 +108,20 @@ public class Color implements Serializable {
 
     @Override
     public String toString() {
-        return "org.fullhappy.entity.Color[ id=" + id + " ]";
+        return "org.fullhappy.entities.Color[ id=" + id + " ]";
+    }
+
+    JSONObject toJSON() throws JSONException {
+        JSONObject jSONObject = new JSONObject();
+        jSONObject.put("id", id);
+        jSONObject.put("itemId", itemId);
+        
+        JSONArray jImage = new JSONArray();
+        for(Image img:images){
+            jImage.put(img.toJSON());
+        }
+        jSONObject.put("images", jImage);
+        return jSONObject;
     }
     
 }

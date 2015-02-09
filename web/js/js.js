@@ -1,3 +1,13 @@
+
+
+
+if (typeof String.prototype.replaceAll !== 'function') {
+    String.prototype.replaceAll = function (find, replace) {
+        var str = this;
+        return str.replace(new RegExp(find, 'g'), replace);
+    };
+}
+
 if (typeof String.prototype.startsWith !== 'function') {
 // see below for better implementation!
     String.prototype.startsWith = function (str) {
@@ -29,7 +39,7 @@ function getCurrentPage() {
             return 'products';
 
     } else if (pathname.startsWith('/products')) {
-        var paths = pathname.split('/');
+        var paths = pathname.substr(1).split('/');
         switch (paths.length) {
             case 2:
                 return 'gallery';
@@ -44,9 +54,9 @@ function getCurrentPage() {
 
 window.currentPage = getCurrentPage();
 
-if(currentPage === 'item'){
+if (currentPage === 'item') {
     alert('Coming Soon. \n We Go To Home Page?');
-    window.location.href='/';
+    window.location.href = '/';
 }
 function focusMenuItem() {
 
@@ -78,4 +88,28 @@ function loadMenu() {
             focusMenuItem();
         });
     }, 0);
+}
+
+
+function loadXMLDoc(url)
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function ()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
+    return xmlhttp.responseText;
 }

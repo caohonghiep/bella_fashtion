@@ -6,7 +6,9 @@
 package org.fullhappy.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -21,15 +23,15 @@ import org.fullhappy.entities.Item;
  *
  * @author AAAA
  */
-public class ItemJpaController implements Serializable {
+public class ItemJpaController extends JpaController {
 
     public ItemJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+    public ItemJpaController() {
+        super();
     }
 
     public void create(Item item) throws PreexistingEntityException, Exception {
@@ -119,6 +121,44 @@ public class ItemJpaController implements Serializable {
         }
     }
 
+    public List<Item> findByCategoryId(long categoryId) {
+        EntityManager entityManager = getEntityManager();
+        List<Item> list1 = null;
+        try {
+            List<Item> list = entityManager.createQuery(
+                    " SELECT e FROM " + Item.class.getSimpleName() + " e WHERE e.categoryId = " + categoryId)
+                    .getResultList();
+            list1 = list.subList(0, list.size());
+        } catch (Exception e) {
+            //Logger.getLogger("findByCategoryId" + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return list1;
+    }
+
+    public List<Item> findByCategoryId(Long categoryId, int startPosition, int maxResult) {
+        EntityManager entityManager = getEntityManager();
+        String query = " SELECT e FROM " + Item.class.getSimpleName();
+        if (categoryId > 0) {
+            query += " e WHERE e.categoryId = " + categoryId;
+        }else{
+            query += " e WHERE 1 = 1" ;
+        }
+        try {
+            List<Item> list = entityManager.createQuery(query)
+                    .setFirstResult(startPosition)
+                    .setMaxResults(maxResult)
+                    .getResultList();
+            return list;
+        } catch (Exception e) {
+            Logger.getLogger("findByCategoryId" + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return new ArrayList<>(0);
+    }
+
     public Item findItem(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -140,5 +180,42 @@ public class ItemJpaController implements Serializable {
             em.close();
         }
     }
-    
+//    public static void main(String []ag){
+//        (new ItemJpaController()).findByCategoryId(6L);
+//    }
+
+    public List<Item> findByInNew(int startPosition, int maxResult) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            List<Item> list = entityManager.createQuery(
+                    " SELECT e FROM " + Item.class.getSimpleName()
+                    + " e WHERE e.inNew = " + true)
+                    .setFirstResult(startPosition).setMaxResults(maxResult)
+                    .getResultList();
+            return list;
+        } catch (Exception e) {
+            Logger.getLogger("findByInNew" + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Item> findByInPromotion(int startPosition, int maxResult) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            List<Item> list = entityManager.createQuery(
+                    " SELECT e FROM " + Item.class.getSimpleName()
+                    + " e WHERE e.inPromotion <> '' ")
+                    .setFirstResult(startPosition).setMaxResults(maxResult)
+                    .getResultList();
+            return list;
+        } catch (Exception e) {
+            Logger.getLogger("findByInNew" + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return new ArrayList<>();
+    }
+
 }

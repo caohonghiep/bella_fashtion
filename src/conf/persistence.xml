@@ -6,6 +6,7 @@
     <class>org.fullhappy.entities.Category</class>
     <class>org.fullhappy.entities.SiteInfo</class>
     <class>org.fullhappy.entities.Item</class>
+    <class>org.fullhappy.entities.Image</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bella_fashion"/>

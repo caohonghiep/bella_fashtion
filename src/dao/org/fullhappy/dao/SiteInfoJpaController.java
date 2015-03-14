@@ -21,15 +21,13 @@ import org.fullhappy.entities.SiteInfo;
  *
  * @author AAAA
  */
-public class SiteInfoJpaController implements Serializable {
+public class SiteInfoJpaController extends JpaController implements Serializable {
 
     public SiteInfoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+    public SiteInfoJpaController() {
+        super();
     }
 
     public void create(SiteInfo siteInfo) throws PreexistingEntityException, Exception {

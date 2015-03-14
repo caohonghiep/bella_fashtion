@@ -30,9 +30,9 @@
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
-                <root id="src.dir"/>
-                <root id="src.dir2" name="Source Packages"/>
-                <root id="src.dir3" name="Source Packages"/>
+                <root id="src.dir" name="rest"/>
+                <root id="src.dir2" name="dao"/>
+                <root id="src.dir3" name="Source"/>
             </source-roots>
             <test-roots/>
         </data>

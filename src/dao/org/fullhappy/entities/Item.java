@@ -7,6 +7,8 @@ package org.fullhappy.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -246,9 +248,16 @@ public class Item implements Serializable {
         jSONObject.put("title", this.title);
         jSONObject.put("categoryId", this.categoryId);
         jSONObject.put("price", this.price);
-        jSONObject.put("images", this.avatars);
         jSONObject.put("inNew", this.inNew);
         jSONObject.put("inPromotion", this.inPromotion);
+        try {
+            //['/images/items/item1_image1_L1.jpg','/images/items/item1_image1_L2.jpg']
+            initavatars();
+            jSONObject.put("images", new JSONArray(avatars));
+
+        } catch (JSONException ex) {
+            jSONObject.put("images", new JSONArray("[]"));
+        }
         return jSONObject;
     }
 
@@ -263,13 +272,50 @@ public class Item implements Serializable {
         jSONObject.put("inNew", this.inNew);
         jSONObject.put("inPromotion", this.inPromotion);
         jSONObject.put("price", this.price);
-        
+
         JSONArray jcolor = new JSONArray();
-        for(Color c: colors){
+        for (Color c : colors) {
             jcolor.put(c.toJSON());
         }
         jSONObject.put("colors", jcolor);
         return jSONObject;
+    }
+
+    private void initavatars() {
+        String str = "";
+        avatars = "";
+        try {
+            if (colors != null && !colors.isEmpty()) {
+                for (Color c : colors) {
+                    if (c.getImages() != null && !c.getImages().isEmpty()) {
+                        c.getImages().get(0).getUrls();
+                        if (c.getImages().get(0).getUrls() != null && c.getImages().get(0).getUrls().length() > 0) {
+
+                            str = c.getImages().get(0).getUrls();
+                            try {
+                                JSONObject jSONObject = new JSONObject(str);
+                                if (jSONObject.get("src") != null && jSONObject.get("src").toString().length() > 0) {
+                                    str = "'" + jSONObject.get("src").toString() + "'";
+                                }
+
+                            } catch (JSONException ex) {
+                               // str = "'/images/updating.jpg'";
+                            }
+                        } else {
+                           // str = "'/images/updating.jpg'";
+                        }
+                    } else {
+                       // str = "'/images/updating.jpg'";
+                    }
+                    avatars += "," + str;
+                }
+            }
+        } catch (Exception e) {
+            avatars = "";
+        }
+        if (avatars.length() > 0) {
+            avatars = "[" + avatars.substring(1) + "]";
+        }
     }
 
 }

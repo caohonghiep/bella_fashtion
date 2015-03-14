@@ -15,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
  */
 public class JpaController implements Serializable {
 
-    private EntityManagerFactory emf = null;
+    protected EntityManagerFactory emf = null;
     
     public JpaController() {
         emf = EMF.getInstance();

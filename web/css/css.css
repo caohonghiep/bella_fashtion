@@ -10,6 +10,7 @@ body{
     transition: opacity 1s;
     transition-timing-function: ease-in-out;
     height: 124px;
+    position: relative;
 }
 /*}header menu*/
 
@@ -23,7 +24,7 @@ body{
     background-image: url('../images/new.png'); 
     background-repeat: no-repeat;
 }
-.item_image_container .safe_off{
+.item_image_container .sale_off{
     width: 100px;
     height: 20px;
     position: absolute;
@@ -36,4 +37,59 @@ body{
     /* box-shadow: 0 0 5px #333; */
     color: red;
     font-weight: bold;
+}
+
+
+/*************************/
+#image_display_container{
+    position: relative;
+}
+#image_display_container .new{
+    width: 55px;
+    height: 29px;
+    position: absolute;
+    top: 16px;
+    right: -4px;
+    background-image: url('../images/new.png');
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+#image_display_container .sale_off{
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    top: 25px;
+    left: -15px;
+    /* background-color: rgba(255, 229, 0, 0.2); */
+    transform: rotate(-45deg);
+    text-align: center;
+    /* padding-top: 30px; */
+    /* box-shadow: 0 0 5px #333; */
+    color: red;
+    font-weight: bold;
+     z-index: 2;
+}
+.sale_off:before{
+    content: '-';
+}
+.sale_off:after{
+    content: '%';
+}
+.item_price:after, #item_price:after{
+    content: 'VND';
+}
+/***************************/
+.trash{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    background-image: url(../images/trash.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 128px;
+    width: 128px;
+    opacity: 0.5;
+    transition: opacity 1s;
+    
 }

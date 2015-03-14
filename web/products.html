@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
         <!--<link rel="icon" href="../../favicon.ico">-->
 
-        <title>Justified Nav Template for Bootstrap</title>
+        <title>Products</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -18,18 +16,18 @@
 
         <!-- Custom Bootstrap-->
         <link href="/lib/customize.bootstrap/style.css" rel="stylesheet">
+        
+         <!--footer style-->
+        <link href="/css/footer.css" rel="stylesheet">        
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+        
         <link href="/css/css.css" rel="stylesheet" type="text/css" />
         <!--Css for list.products-->
         <link href="/css/list.products.css" rel="stylesheet">
         <link href="/css/left.side.css" rel="stylesheet" media="screen">
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
         <script src="/lib/jquery/jquery-2.1.3.js"></script>
-        <script src="/js/products.js"></script>
+        
         <style>
 
             .logo{
@@ -41,22 +39,19 @@
             #left_side{
                 width: 20%;
             }
+            .fullhappy_light_box_light{
+                position: fixed !important;
+            }
+
         </style>
         <script src="/js/js.js"></script>
         <script>
             function updateItem() {
                 alert('updateItem');
             }
-            jQuery(document).ready(function () {
-                jQuery('.item_image_container').each(function () {
-                    jQuery(this).height(jQuery(this).width() * 365 / 255);
-                    jQuery(this).css('overflow', 'hidden');
-                });
-                jQuery('.item_image_container').click(function () {
-                    window.location.href = "http://localhost:8080/detail.html";
-                });
-            });
+           
         </script>
+        <script src="/js/products.js"></script>
     </head>
 
     <body>
@@ -68,74 +63,72 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div id="left_side" class="col-lg-2" >
-                    <ul>
-                        <li>
-                            <div  class="left_side_head" onEdit="updateItem">Đầm</div>
-                            <ul>
-                                <li><div class="left_side_item active" onEdit="updateItem">Đầm dạ hội</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm maxi</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm xòe</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm body sexy</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm body có tay</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem"> Đầm suông</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm chữ A</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Đầm giả vest</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div  class="left_side_head" onEdit="updateItem">Jumsuit</div>
-                            <ul>
-                                <li><div class="left_side_item" onEdit="updateItem">Jumsuit dài</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Jumsuit ng</div></li>
-                            </ul>
-
-                        </li>
-                        <li>
-                            <div  class="left_side_head" onEdit="updateItem">Set váy & áo rời</div>
-                            <ul>
-                                <li><div class="left_side_item" onEdit="updateItem">Set váy bút chì & áo rời</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Set váy xòe ngắn & áo rời</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Set váy xòe dài & áo rời</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Set váy peplum & áo rời</div></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div  class="left_side_head" onEdit="updateItem">Set quần và áo rời</div>
-                            <ul>
-                                <li><div class="left_side_item" onEdit="updateItem">Set quần ngắn và áo rời</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Set quần dài ống túm và áo rời</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Set quần dài ống suông và áo rời</div></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div  class="left_side_head" onEdit="updateItem">Váy&quần&áo rời</div>
-                            <ul>
-                                <li><div class="left_side_item" onEdit="updateItem">Váy</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Quần</div></li>
-                                <li><div class="left_side_item" onEdit="updateItem">Áo</div></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <!--                    <ul>
+                                            <li>
+                                                <div  class="left_side_head" onEdit="updateItem">Đầm</div>
+                                                <ul>
+                                                    <li><div class="left_side_item active" onEdit="updateItem">Đầm dạ hội</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm maxi</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm xòe</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm body sexy</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm body có tay</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem"> Đầm suông</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm chữ A</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Đầm giả vest</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div  class="left_side_head" onEdit="updateItem">Jumsuit</div>
+                                                <ul>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Jumsuit dài</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Jumsuit ng</div></li>
+                                                </ul>
+                    
+                                            </li>
+                                            <li>
+                                                <div  class="left_side_head" onEdit="updateItem">Set váy & áo rời</div>
+                                                <ul>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set váy bút chì & áo rời</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set váy xòe ngắn & áo rời</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set váy xòe dài & áo rời</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set váy peplum & áo rời</div></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div  class="left_side_head" onEdit="updateItem">Set quần và áo rời</div>
+                                                <ul>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set quần ngắn và áo rời</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set quần dài ống túm và áo rời</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Set quần dài ống suông và áo rời</div></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div  class="left_side_head" onEdit="updateItem">Váy&quần&áo rời</div>
+                                                <ul>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Váy</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Quần</div></li>
+                                                    <li><div class="left_side_item" onEdit="updateItem">Áo</div></li>
+                                                </ul>
+                                            </li>
+                                        </ul>-->
                 </div>
                 <div id="content_side" class="col-lg-10">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Library</a></li>
-                        <li>Data</li>
+                        <li><a href="/">Trang Chủ</a></li>
+                        <li><a href="#">Sản Phẩm</a></li>
                     </ol>
                     <div id="list_item_container" class="row">
-                        
+
                     </div>
                 </div>
             </div>
             <!-- Site footer -->
             <footer class="footer">
-                <p>&copy; Company 2014</p>
+                
             </footer>           
         </div> <!-- container -->
-        <script src="/lib/bootstrap/js/bootstrap.js"></script>
         <script src="/lib/customize.bootstrap/script.js"></script>
-        <script src="/lib/on.edit.event/js/on.edit.js"></script>        
+        <!--<script src="/lib/on.edit.event/js/on.edit.js"></script>-->        
 
     </body>
 

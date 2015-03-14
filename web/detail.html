@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        <title>Justified Nav Template for Bootstrap</title>
+        <title>Detail</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -17,6 +15,11 @@
 
         <!-- Custom Bootstrap-->
         <link href="/lib/customize.bootstrap/style.css" rel="stylesheet">
+        
+         <!--footer style-->
+        <link href="/css/footer.css" rel="stylesheet">        
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+        
         <link href="/css/css.css" rel="stylesheet" type="text/css" />
         <link href="/css/detail.css" rel="stylesheet">
 
@@ -26,92 +29,75 @@
             .logo{
                 margin: 30px 0 40px 0;
             }
-            #content_side{
-                width: 80%;
+            .fullhappy_light_box_light{
+                /*position: fixed !important;*/
             }
-            #left_side{
-                width: 20%;
-            }
+
+
         </style>
         <script src='/lib/elevatezoom.master/jquery.elevatezoom.js'></script>
         <script src="/js/js.js"></script>
         <script>
-            function updateItem() {
-                alert('updateItem');
+
+
+            function updateItem(node) {
+                var param = jQuery(node).attr("name");
+                var value = jQuery(node).html();
+//                if (param === 'price') {
+//                    value = value.replaceAll('VND', '');
+//                }
+//                var url = getRootURL() + '/rest/items/item/' + (window.location.href.split('/'))[window.location.href.split('/').length - 2] + '/' + window.location.href.split('/')[window.location.href.split('/').length - 1];
+                var result = updateItem1(param,value);
+                if (!result && param === 'displayId') {
+                    bootbox.alert("Đã có sản phẩm mang Mã Số: " + value, function () {
+                    });
+
+                }
+                return result;
+
             }
             
+            function updateItem1(param,value){
+                var url = getRootURL() + '/rest/items/item/' + (window.location.href.split('/'))[window.location.href.split('/').length - 2] + '/' + window.location.href.split('/')[window.location.href.split('/').length - 1];
+                var result = eval('(' + postValue(url, param + '=' + encodeURIComponent(value)) + ')');
+                return result;
+            }
         </script>
     </head>
 
     <body>
 
-        <div class="container">
+        <div class="container" >
 
             <div id="masthead" class="masthead"></div>
 
             <!-- Example row of columns -->
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li>Data</li>
+                <li><a href="/">Trang Chủ</a></li>
+                <li><a href="#">Sản Phẩm</a></li>
+                <li>Chi Tiết Sản Phẩm</li>
             </ol>
             <div id="detail_container">
 
-                <div id="images_container">
+                <div id="images_container" >
                     <div id="images_thumbnail_container">
                         <div id="images_thumbnail_content">
-<!--                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" onEdit="updateItem" src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" src="http://dynstatic01-ec.zalora.com/HjkZ2nwFdinZKQPtKaYDtyszD5M=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg"
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" />
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" src="http://dynstatic01-ec.zalora.com/HjkZ2nwFdinZKQPtKaYDtyszD5M=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg"
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" />
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img  class="image_thumbnail" src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                      srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                      srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" src="http://dynstatic01-ec.zalora.com/HjkZ2nwFdinZKQPtKaYDtyszD5M=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg"
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" />
-
-                            </div>
-                            <div class="image_thumbnail_content">
-                                <img class="image_thumbnail" src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                     srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                            </div>-->
                         </div>
                     </div>
                     <div id="image_display_container">
-                        <div id="image_display_content">
-                            <img  id="image_display" src="/images/load-icon.gif" />
+                        <div id="image_display_content" style="" >
+                            <img alt="" id="image_display" src="/images/load-icon.gif" />
                         </div>
                     </div>
 
                 </div>
 
                 <div id="info_container">
-                    <div id="item_id" onEdit="updateItem"></div>
-                    <div id="item_title" onEdit="updateItem"></div>
-                    <div id="item_price" onEdit="updateItem"> VND</div>
-                    <div id="item_description" onEdit="updateItem" >
-                       
+                    <div id="item_id" name="displayId" onEdit="updateItem"></div>
+                    <div id="item_title" name="title" onEdit="updateItem"></div>
+                    <div id="item_price" class="item_price" name="price" onkeydown="Support.validateNumber()" onEdit="updateItem"> VND</div>
+                    <div id="item_description" class="item_description" name="description" onEdit="updateItem" >
+
 
                     </div>
                     <div id="item_policy">
@@ -131,21 +117,7 @@
                         MÀU SẮC KHÁC
                     </div>
                     <div id="colors_thumbnail_container">
-<!--                        <div class="image_thumbnail_content">
-                            <img src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                 srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                 srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                        </div>
-                        <div class="image_thumbnail_content">
-                            <img  src="http://dynstatic01-ec.zalora.com/HjkZ2nwFdinZKQPtKaYDtyszD5M=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg"
-                                  srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" 
-                                  srcZoom="http://static-origin.zalora.vn/p/inner-circle-2448-792573-3.jpg" />
-                        </div>
-                        <div class="image_thumbnail_content">
-                            <img  src="http://dynstatic02-ec.zalora.com/4xCUesXKE_IyLI8bniOVLxr0qhU=/fit-in/39x56/filters:quality(90):fill(ffffff)/http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                  srcDisplay="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" 
-                                  srcZoom="http://static-origin.zalora.vn/p/inner-circle-2442-792573-1.jpg" />
-                        </div>-->
+
                     </div>
 
                 </div>
@@ -154,18 +126,25 @@
             <div style="clear: both"></div>    
             <!-- Site footer -->
             <footer class="footer">
-                <p>&copy; Company 2014</p>
+                
             </footer>
 
-
+            
+<!--            <div class="sale_off_tool" style="">
+                <div draggable="true" class="item_image_container">
+                    <div  class="new"></div>
+                </div>
+                <div draggable="true" class="item_image_container">
+                    <div class="sale_off">-10%</div> 
+                </div>
+                <div draggable="true" class="item_image_container" >
+                    <div class="sale_off" >-50000VND</div> 
+                </div>
+            </div>-->
         </div> <!-- /container -->
-        <script src="/lib/bootstrap/js/bootstrap.js"></script>
-        <script src="/lib/bootbox/bootbox.js"></script>
         <script src="/lib/customize.bootstrap/script.js"></script>
-
-
         <script src="/js/detail.js"></script>
-        <script src="/lib/on.edit.event/js/on.edit.js"></script>
-
+        <script src="/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="/lib/bootbox/bootbox.min.js"></script>
     </body>
 </html>

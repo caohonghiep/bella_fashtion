@@ -11,8 +11,15 @@ import java.util.logging.Logger;
 import org.fullhappy.dao.CategoryJpaController;
 import org.fullhappy.dao.exceptions.NonexistentEntityException;
 import org.fullhappy.entities.Category;
+import org.fullhappy.rest.MediaType;
 import org.fullhappy.rest.annotation.FormParam;
+import org.fullhappy.rest.annotation.GET;
+import org.fullhappy.rest.annotation.POST;
 import org.fullhappy.rest.annotation.Path;
+import org.fullhappy.rest.annotation.Produces;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -22,6 +29,9 @@ import org.fullhappy.rest.annotation.Path;
 public class CategoryService {
 
     private final CategoryJpaController categoryJpaController = new CategoryJpaController();
+    @POST
+    @Path("/create")
+    @Produces(MediaType.APPLICATION_JSON)
     public String create(@FormParam("parent_id") Integer parentId,
             @FormParam("title")String title){
         String re;
@@ -42,6 +52,32 @@ public class CategoryService {
        
     }
 
+     @GET
+    @Path("/list")
+    @Produces(MediaType.APPLICATION_JSON)
+     public String list() throws JSONException{
+         
+         JSONArray jSONArrayParent = new JSONArray();
+         List<Category> parentCategorys = categoryJpaController.findCategoryByParentId(0L);
+         if(parentCategorys !=null && !parentCategorys.isEmpty()){
+             for (Category parentCategory : parentCategorys) {
+                 JSONObject jSONObject = parentCategory.toJSON();
+                 List<Category> childCategorys = categoryJpaController.findCategoryByParentId(parentCategory.getId());
+                 
+                 JSONArray jSONArrayChild = new JSONArray();
+                 if(childCategorys!=null && !childCategorys.isEmpty()){                     
+                     for (Category childCategory : childCategorys) {
+                         JSONObject json = childCategory.toJSON();
+                         jSONArrayChild.put(json);
+                     }
+                 }
+                 jSONObject.put("childs", jSONArrayChild);
+                 jSONArrayParent.put(jSONObject);
+             }
+             
+         }
+         return jSONArrayParent.toString();
+     }
 //    public void edit(Category category) throws NonexistentEntityException, Exception {
 //       
 //    }

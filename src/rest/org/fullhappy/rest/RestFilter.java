@@ -137,18 +137,41 @@ public class RestFilter implements Filter {
             FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        request.setCharacterEncoding("UTF-8");
         if (!validate(req)) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
         HashMap<String, Object> valuesInRequest = getValueInRequest(req);
         String[] pathItems = getPathItemsFromRequest(req);
-        Object entity = restEntitys.get(pathItems[0]);
-        Method method = getMethodWithPath(entity, pathItems[1], req.getMethod());
-        if (method == null) {
+        if (pathItems.length < 2) {
+            res.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        String[] keysInPath = getKeysInPath(method);
+        Object entity = restEntitys.get(pathItems[0]);
+        if (entity == null) {
+             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+             logger.log(Level.INFO, "not found url: \"{0}\" ", 
+                    new Object[]{joinString(pathItems, "/")});
+            return;
+        }
+        Method method = getMethodWithPath(entity, pathItems[1], req.getMethod());
+        if (method == null) {
+             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+             logger.log(Level.INFO, "request url: \"{0}\" does not match with any method in Class {1}", 
+                    new Object[]{joinString(pathItems, "/"),entity.getClass().getName()});
+            return;
+        }
+        String[] keysInPath = getKeysInPath(method);        
+        if (keysInPath.length != pathItems.length) {   
+             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            logger.log(Level.INFO, "request url: \"{0}\" does not match with \"{1}\" in Class {2}", 
+                    new Object[]{joinString(pathItems, "/").substring(joinString(pathItems, "/").indexOf("/")), joinString(keysInPath, "/"),entity.getClass().getName()});
+            return;
+        }
+        
+//        boolean[] notNullStatus = getNullStatus(method);
+        
         HashMap<String, Object> valuesInPath = getValueInPath(keysInPath, pathItems);
         valuesInPath.putAll(valuesInRequest);
 
@@ -224,6 +247,7 @@ public class RestFilter implements Filter {
 
     private HashMap<String, Object> getValueInPath(String[] keys,
             String[] Values) {
+
         HashMap<String, Object> p = new HashMap<String, Object>();
         for (int i = 0; i < keys.length; i++) {
             String key = keys[i];
@@ -255,7 +279,10 @@ public class RestFilter implements Filter {
         Object value = null;
 
         for (int i = 0; i < length; i++) {
-
+            if (sourceValue[i] == null) {
+                targetValues[i] = sourceValue[i];
+                continue;
+            }
             if (((Class) (targetTypes[i])).isArray()
                     && !isArray(sourceValue[i])) {
                 Object o = sourceValue[i];
@@ -407,7 +434,7 @@ public class RestFilter implements Filter {
         }
         if (re.isEmpty()) {
             return null;
-        } else {            
+        } else {
             for (Method m : re) {
                 Annotation pathAnnotation;
                 switch (requestMethod) {
@@ -437,9 +464,9 @@ public class RestFilter implements Filter {
                         break;
                 }
             }
-            if(re.size()==1){
+            if (re.size() == 1) {
                 return re.get(0);
-            }else{
+            } else {
                 return null;
             }
         }
@@ -476,6 +503,15 @@ public class RestFilter implements Filter {
     private boolean checkRequireMethod(Method re, String requestMethod) {
         //TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String joinString(String[] strings, String separator) {
+        StringBuilder result = new StringBuilder();
+        for (String string : strings) {
+            result.append(string);
+            result.append(separator);
+        }
+        return result.toString();
     }
 
 }

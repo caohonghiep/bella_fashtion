@@ -31,7 +31,7 @@ and open the template in the editor.
     background-size: cover;
     height: 292px;
     overflow-y: hidden; 
-    background-image: url(../images/load-icon.gif);
+    /*background-image: url(../images/load-icon.gif);*/
     background-position:center center; 
 }
 .item_container .item_image_container img{
@@ -41,4 +41,13 @@ and open the template in the editor.
 .item_container .item_image_container img:hover{
     opacity: 0;
     width: 100%;
+}
+
+.add_new{
+    background: url(../images/add_new_icon.png) no-repeat center center;
+    background-size: contain;
+}
+
+.list_item_container{
+    transition: linear height 1s;
 }

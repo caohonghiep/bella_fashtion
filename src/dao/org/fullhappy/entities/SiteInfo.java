@@ -15,6 +15,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -22,17 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "site_info")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "SiteInfo.findAll", query = "SELECT s FROM SiteInfo s"),
-    @NamedQuery(name = "SiteInfo.findById", query = "SELECT s FROM SiteInfo s WHERE s.id = :id"),
-    @NamedQuery(name = "SiteInfo.findByWesiteName", query = "SELECT s FROM SiteInfo s WHERE s.wesiteName = :wesiteName"),
-    @NamedQuery(name = "SiteInfo.findByEmail", query = "SELECT s FROM SiteInfo s WHERE s.email = :email"),
-    @NamedQuery(name = "SiteInfo.findByPhone", query = "SELECT s FROM SiteInfo s WHERE s.phone = :phone"),
-    @NamedQuery(name = "SiteInfo.findByAdsress", query = "SELECT s FROM SiteInfo s WHERE s.adsress = :adsress"),
-    @NamedQuery(name = "SiteInfo.findByLocation", query = "SELECT s FROM SiteInfo s WHERE s.location = :location"),
-    @NamedQuery(name = "SiteInfo.findByLogoUrl", query = "SELECT s FROM SiteInfo s WHERE s.logoUrl = :logoUrl")})
 public class SiteInfo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,8 +42,8 @@ public class SiteInfo implements Serializable {
     @Column(name = "phone")
     private String phone;
     @Basic(optional = false)
-    @Column(name = "adsress")
-    private String adsress;
+    @Column(name = "address")
+    private String address;
     @Basic(optional = false)
     @Column(name = "location")
     private String location;
@@ -66,8 +60,8 @@ public class SiteInfo implements Serializable {
     private String newMessage;
     @Basic(optional = false)
     @Lob
-    @Column(name = "safe_off_message")
-    private String safeOffMessage;
+    @Column(name = "sale_off_message")
+    private String saleOffMessage;
 
     public SiteInfo() {
     }
@@ -76,17 +70,17 @@ public class SiteInfo implements Serializable {
         this.id = id;
     }
 
-    public SiteInfo(Boolean id, String wesiteName, String email, String phone, String adsress, String location, String logoUrl, String welcomeMessage, String newMessage, String safeOffMessage) {
+    public SiteInfo(Boolean id, String wesiteName, String email, String phone, String address, String location, String logoUrl, String welcomeMessage, String newMessage, String saleOffMessage) {
         this.id = id;
         this.wesiteName = wesiteName;
         this.email = email;
         this.phone = phone;
-        this.adsress = adsress;
+        this.address = address;
         this.location = location;
         this.logoUrl = logoUrl;
         this.welcomeMessage = welcomeMessage;
         this.newMessage = newMessage;
-        this.safeOffMessage = safeOffMessage;
+        this.saleOffMessage = saleOffMessage;
     }
 
     public Boolean getId() {
@@ -121,12 +115,12 @@ public class SiteInfo implements Serializable {
         this.phone = phone;
     }
 
-    public String getAdsress() {
-        return adsress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdsress(String adsress) {
-        this.adsress = adsress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getLocation() {
@@ -162,11 +156,11 @@ public class SiteInfo implements Serializable {
     }
 
     public String getSafeOffMessage() {
-        return safeOffMessage;
+        return saleOffMessage;
     }
 
-    public void setSafeOffMessage(String safeOffMessage) {
-        this.safeOffMessage = safeOffMessage;
+    public void setSafeOffMessage(String saleOffMessage) {
+        this.saleOffMessage = saleOffMessage;
     }
 
     @Override
@@ -193,5 +187,16 @@ public class SiteInfo implements Serializable {
     public String toString() {
         return "org.fullhappy.entities.SiteInfo[ id=" + id + " ]";
     }
-    
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject jSONObject = new JSONObject();
+        jSONObject.put("id", this.id);
+        jSONObject.put("address", this.address);
+        jSONObject.put("email", this.email);
+        jSONObject.put("location", this.location);
+        jSONObject.put("wesiteName", this.wesiteName);
+        jSONObject.put("saleOffMessage", this.saleOffMessage);
+        return jSONObject;
+    }
+
 }

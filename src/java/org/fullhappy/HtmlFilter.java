@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.fullhappy.filter;
+package org.fullhappy;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author AAAA
  */
-@WebFilter(filterName = "HtmlFilter", urlPatterns = {"/contact","/products","/products/*"})
+@WebFilter(filterName = "HtmlFilter", urlPatterns = {"/contact","/products","/products/*","/login"})
 public class HtmlFilter implements Filter {
 
 
@@ -37,7 +37,6 @@ public class HtmlFilter implements Filter {
             if("/contact".equals(uri)){
                 dispatcher = httpServletRequest.getRequestDispatcher("/contact.html");
                 dispatcher.forward(request, response);
-                return;
             }else if(uri.startsWith("/products")){
                 String[] uriItems =uri.substring(1).split("/");
                 if(uriItems.length<=2){
@@ -46,7 +45,9 @@ public class HtmlFilter implements Filter {
                     dispatcher = httpServletRequest.getRequestDispatcher("/detail.html");
                 }              
                 dispatcher.forward(request, response);
-                return;
+            }else if("/login".equals(uri)){
+                dispatcher = httpServletRequest.getRequestDispatcher("/login.html");
+                dispatcher.forward(request, response);
             }else{
                 chain.doFilter(request, response);
             }

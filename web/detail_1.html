@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="vi"><head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Detail</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="/lib/customize.bootstrap/justified-nav.css" rel="stylesheet">
+
+        <!-- Custom Bootstrap-->
+        <link href="/lib/customize.bootstrap/style.css" rel="stylesheet">
+        <link href="/css/css.css" rel="stylesheet" type="text/css">
+        <link href="/css/detail.css" rel="stylesheet">
+
+        <script src="/lib/jquery/jquery-2.1.3.js"></script>
+        <script src="/lib/on.edit.event/js/on.edit.js"></script>
+        <style>
+
+            .logo{
+                margin: 30px 0 40px 0;
+            }
+            .fullhappy_light_box_light{
+                /*position: fixed !important;*/
+            }
+
+
+        </style>
+        <script src="/lib/elevatezoom.master/jquery.elevatezoom.js"></script>
+        <script src="/js/js.js"></script>
+        <script>
+
+
+            function updateItem(node) {
+                var param = jQuery(node).attr("name");
+                var value = jQuery(node).html();
+                if (param === 'price') {
+                    value = value.replaceAll('VND', '');
+                }
+                var url = getRootURL() + '/rest/items/item/' + (window.location.href.split('/'))[window.location.href.split('/').length - 2] + '/' + window.location.href.split('/')[window.location.href.split('/').length - 1];
+                var result = eval('(' + postValue(url, param + '=' + encodeURIComponent(value)) + ')');
+                if (!result && param === 'displayId') {
+                    bootbox.alert("Đã có sản phẩm mang Mã Số: " + value, function () {
+                    });
+
+                }
+                return result;
+
+            }
+            jQuery('body').on("dragstart", '.sale_off_tool .item_image_container', function (event) {
+                window.dragItem = event.target;
+            });
+
+        </script>
+    </head>
+
+    <body cz-shortcut-listen="true">
+
+        <div class="container">
+
+            <div id="masthead" class="masthead" style="opacity: 1;"><h2 class="logo text-muted text-center text-uppercase text-strong">Bella Fashion</h2>
+                <h4 style="position: absolute;top: -50px;right: 0px;" class="text-muted">Hotline:0905607078</h4>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li id="menu_home"><a href="/">TRANG CHỦ</a></li>
+                        <li id="menu_in_new"><a href="/products?in_new">HÀNG MỚI VỀ</a></li>
+                        <li id="menu_products" class="active"><a href="/products">SẢN PHẨM&#8203;</a></li>
+                        <li id="#menu_item"><a href="/products?item">PHỤ KIỆN</a></li>
+                        <li id="menu_sale_off"><a href="/products?sale_off">SALE OFF</a></li>
+                        <li id="menu_contact"><a href="/contact">LIÊN HỆ</a></li>
+                    </ul>
+                </nav></div>
+
+            <!-- Example row of columns -->
+            <ol class="breadcrumb">
+                <li><a href="/">Trang Chủ</a></li>
+                <li><a href="#">Sản Phẩm</a></li>
+                <li class="active">Chi Tiết Sản Phẩm</li>
+            </ol>
+            <div id="detail_container">
+
+                <div id="images_container">
+                    <div id="images_thumbnail_container">
+                        <div id="images_thumbnail_content">
+                            <div class="image_thumbnail_content"><img imageid="9" src="/images/items/item1_image1_t1.jpg" colorid="3" srcdisplay="/images/items/item1_image1_L1.jpg" srczoom="/images/items/item1_image1_L1.jpg" data-zoom-image="/images/items/item1_image1_L1.jpg" class="image_thumbnail" draggable="true" ondelete="deleteImage(9)"></div><div class="image_thumbnail_content"><img imageid="10" src="/images/items/item1_image1_t2.jpg" colorid="3" srcdisplay="/images/items/item1_image1_L2.jpg" srczoom="/images/items/item1_image1_L2.jpg" data-zoom-image="/images/items/item1_image1_L2.jpg" class="image_thumbnail" draggable="true"></div><div class="image_thumbnail_content"><img imageid="11" src="/images/items/item1_image1_t3.jpg" colorid="3" srcdisplay="/images/items/item1_image1_L3.jpg" srczoom="/images/items/item1_image1_L3.jpg" data-zoom-image="/images/items/item1_image1_L3.jpg" class="image_thumbnail" draggable="true"></div><div class="image_thumbnail_content"><img imageid="12" src="/images/items/item1_image1_t4.jpg" colorid="3" srcdisplay="/images/items/item1_image1_L4.jpg" srczoom="/images/items/item1_image1_L4.jpg" data-zoom-image="/images/items/item1_image1_L4.jpg" class="image_thumbnail" draggable="true"></div></div>
+                    </div>
+                    <div id="image_display_container">
+                        <div id="image_display_content" style="background-image: url(http://localhost:8080/images/items/item1_image1_t1.jpg);">
+                            <img alt="" id="image_display" src="/images/items/item1_image1_L1.jpg" data-zoom-image="/images/items/item1_image1_L1.jpg">
+                            <div class="new"></div>
+                            <div class="sale_off">-10%</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="info_container">
+                    <div id="item_id" name="displayId" onedit="updateItem">item_2</div>
+                    <div id="item_title" name="title" onedit="updateItem">Đầm Peplum Phối Ren</div>
+                    <div id="item_price" name="price" onkeydown="Support.validateNumber()" onedit="updateItem">0VND</div>
+                    <div id="item_description" class="item_description" name="description" onedit="updateItem"><div>Bạn sẽ trở nên vô cùng quyến rũ và sang trọng với thiết kế đầm peplum may phối ren màu đỏ rượu từ thương hiệu ZALORA.&nbsp;</div><div><br></div><div>- Chất liệu tơ nhân tạo pha</div><div>- Cổ tròn cao</div><div>- Không tay</div></div>
+                    <div id="item_policy">
+                        <div>Giao hàng trên 390,000VND <span class=" btn-success btn-small" style="float: right">Miễn phí</span></div>
+                        <div>30 ngày đổi trả hàng<span class=" btn-success btn-small" style="float: right">Miễn phí</span></div>
+                        <div>Thanh toán khi nhận hàng<span class=" btn-success btn-small" style="float: right">Miễn phí</span></div>
+                    </div>
+                    <div style="margin-top: 20px">
+                        SẼ CÓ TẠI NHÀ BẠN
+                        <br>
+                        <span class="muted" style="font-style: italic;font-size: 12px  ">trong 3 - 5 ngày làm việc</span>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                <div id="item_colors_container">
+                    <div style=" padding-top: 10px; padding-bottom: 10px;">
+                        MÀU SẮC KHÁC
+                    </div>
+                    <div id="colors_thumbnail_container">
+
+                        <div class="image_thumbnail_content"><img imageid="9" src="/images/items/item1_image1_t1.jpg" colorid="3" srcdisplay="/images/items/item1_image1_L1.jpg" srczoom="/images/items/item1_image1_L1.jpg" data-zoom-image="/images/items/item1_image1_L1.jpg" class="image_thumbnail" draggable="true"></div></div>
+
+                </div>
+
+            </div>
+            <div style="clear: both"></div>    
+            <!-- Site footer -->
+            <footer class="footer">
+                <p>© Company 2014</p>
+            </footer>
+
+            <div class="sale_off_tool" style="">
+                <div class="item_image_container" draggable="true" style="height: 64px; position: relative;border: 1px solid #555; margin: 4px;width: 79px;">
+                    <div class="new"></div>
+                </div>
+                <div class="item_image_container" draggable="true" style="height: 64px; position: relative;border: 1px solid #555; margin: 4px;width: 79px;">
+                    <div class="sale_off">-10%</div> 
+                </div>
+                <div class="item_image_container" draggable="true" style="height: 64px; position: relative;border: 1px solid #555; margin: 4px;width: 79px;">
+                    <div class="sale_off" >-50000VND</div> 
+                </div>
+            </div>
+
+        </div> <!-- /container -->
+        <script src="/lib/customize.bootstrap/script.js"></script>
+        <script src="/js/detail.js"></script>
+        <script src="/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="/lib/bootbox/bootbox.min.js"></script>
+
+
+        <div class="zoomContainer" style="-webkit-transform: translateZ(0px); position: absolute; left: 157.5px; top: 211px; height: 497px; width: 344px;"><div class="zoomLens" style="float: right; overflow: hidden; z-index: 999; -webkit-transform: translateZ(0px); opacity: 0.4; zoom: 1; width: 224.367454068241px; height: 224.553636363636px; cursor: crosshair; border: 1px solid rgb(0, 0, 0); position: absolute; left: 0px; top: 0px; display: none; background-color: white; background-position: 0px 0px; background-repeat: no-repeat;">&nbsp;</div><div class="zoomWindowContainer" style="width: 497px;"><div style="overflow: hidden; text-align: center; width: 497px; height: 497px; float: left; z-index: 100; border: 1px solid rgb(136, 136, 136); position: absolute; top: -2px; left: 354px; display: none; background-image: url(http://localhost:8080/images/items/item1_image1_L1.jpg); background-color: rgb(255, 255, 255); background-size: 762px 1100px; background-position: 0px 0px; background-repeat: no-repeat;" class="zoomWindow">&nbsp;</div></div></div></body></html>

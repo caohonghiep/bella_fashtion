@@ -108,6 +108,17 @@ public class ParseEngine {
 		return Long.parseLong(str);
 	}
 
+        
+        @SuppressWarnings("unused")
+	private static Boolean parseStringToboolean(String str) {
+		return "true".equalsIgnoreCase(str);
+	}
+        
+        @SuppressWarnings("unused")
+	private static Boolean parseStringToBoolean(String str) {
+		return "true".equalsIgnoreCase(str);
+	}
+        
 	public static class UnsupportParseMethod extends Exception {
 		private static final long serialVersionUID = 1L;
 		private String message;

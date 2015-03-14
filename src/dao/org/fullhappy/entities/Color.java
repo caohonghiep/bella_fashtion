@@ -113,7 +113,7 @@ public class Color implements Serializable {
 
     JSONObject toJSON() throws JSONException {
         JSONObject jSONObject = new JSONObject();
-        jSONObject.put("id", id);
+        jSONObject.put("colorId", id);
         jSONObject.put("itemId", itemId);
         
         JSONArray jImage = new JSONArray();

@@ -6,7 +6,9 @@
 package org.fullhappy.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -16,6 +18,7 @@ import javax.persistence.criteria.Root;
 import org.fullhappy.dao.exceptions.NonexistentEntityException;
 import org.fullhappy.dao.exceptions.PreexistingEntityException;
 import org.fullhappy.entities.Category;
+import org.fullhappy.entities.Item;
 
 /**
  *
@@ -108,6 +111,22 @@ public class CategoryJpaController extends JpaController{
         } finally {
             em.close();
         }
+    }
+    
+    public List<Category> findCategoryByParentId(Long parentId) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            List<Category> list = entityManager.createQuery(
+                    " SELECT e FROM " + Category.class.getSimpleName()
+                    + " e WHERE e.parentId =:parentId").
+                    setParameter("parentId", parentId).getResultList();
+            return list;
+        } catch (Exception e) {
+            Logger.getLogger("findByInNew" + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return new ArrayList<>();
     }
 
     public Category findCategory(Long id) {

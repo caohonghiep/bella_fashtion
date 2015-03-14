@@ -25,15 +25,6 @@ import org.fullhappy.entities.Item;
  */
 public class ItemJpaController extends JpaController {
 
-    public ItemJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public ItemJpaController() {
-        super();
-    }
-
     public void create(Item item) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
@@ -145,6 +136,7 @@ public class ItemJpaController extends JpaController {
         }else{
             query += " e WHERE 1 = 1" ;
         }
+        query+=" AND e.deletedTime = 0";
         try {
             List<Item> list = entityManager.createQuery(query)
                     .setFirstResult(startPosition)

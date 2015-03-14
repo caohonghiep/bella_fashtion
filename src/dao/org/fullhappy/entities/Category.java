@@ -17,6 +17,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -41,7 +44,7 @@ public class Category implements Serializable {
     private Long id;
     @Basic(optional = false)
     @Column(name = "parent_id")
-    private int parentId;
+    private Long parentId;
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
@@ -58,7 +61,7 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Category(Long id, int parentId, String title, long createdTime) {
+    public Category(Long id, Long parentId, String title, long createdTime) {
         this.id = id;
         this.parentId = parentId;
         this.title = title;
@@ -73,11 +76,11 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public int getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -130,4 +133,11 @@ public class Category implements Serializable {
         return "org.fullhappy.entities.Category[ id=" + id + " ]";
     }
     
+    public JSONObject toJSON() throws JSONException {
+        JSONObject jSONObject = new JSONObject();
+        jSONObject.put("categoryId", id);
+        jSONObject.put("parentId", parentId);
+        jSONObject.put("title", title);
+        return jSONObject;
+    }
 }

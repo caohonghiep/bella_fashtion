@@ -16,21 +16,13 @@ import javax.persistence.criteria.Root;
 import org.fullhappy.dao.exceptions.NonexistentEntityException;
 import org.fullhappy.dao.exceptions.PreexistingEntityException;
 import org.fullhappy.entities.Color;
+import org.fullhappy.entities.Item;
 
 /**
  *
  * @author AAAA
  */
-public class ColorJpaController implements Serializable {
-
-    public ColorJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+public class ColorJpaController extends JpaController implements Serializable {
 
     public void create(Color color) throws PreexistingEntityException, Exception {
         EntityManager em = null;
@@ -39,6 +31,7 @@ public class ColorJpaController implements Serializable {
             em.getTransaction().begin();
             em.persist(color);
             em.getTransaction().commit();
+            emf.getCache().evict(Item.class, color.getItemId());
         } catch (Exception ex) {
             if (findColor(color.getId()) != null) {
                 throw new PreexistingEntityException("Color " + color + " already exists.", ex);
@@ -88,6 +81,7 @@ public class ColorJpaController implements Serializable {
             }
             em.remove(color);
             em.getTransaction().commit();
+            emf.getCache().evict(Item.class, color.getItemId());
         } finally {
             if (em != null) {
                 em.close();

@@ -15,9 +15,10 @@
     padding-bottom: 10px;
     padding-top: 10px;
     clear: both;
+    cursor: pointer;
 }
 
-.left_side_item:hover,.left_side_item.active{
+.left_side_head:hover,.left_side_item:hover,.left_side_item.active{
     color: rgb(157, 109, 49);
     cursor: pointer;
     text-shadow: 0 1px 0 #ffffff;
@@ -26,3 +27,15 @@
 /*.left_side_head:hover{
     background-color: rgba(212,212,212,0.2) !important;
 }*/
+
+#left_side>ul>li>ul{
+    overflow: hidden;
+    opacity: 0;
+    height: 0px;
+    transition: height linear 0.5s,opacity linear 0.5s ;    
+}
+
+#left_side .height_auto{
+    height:auto;
+    opacity:1;
+}

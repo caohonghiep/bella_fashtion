@@ -61,9 +61,9 @@ public class ProductsService {
     }
     
     @GET
-    @Path("/safeOffShortInfoList")
+    @Path("/saleOffShortInfoList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String safeOffShortInfoList(@FormParam("start") int startPosition, @FormParam("max") int maxResult) {
+    public String saleOffShortInfoList(@FormParam("start") int startPosition, @FormParam("max") int maxResult) {
         List<Item> items = itemJpaController.findByInPromotion(startPosition, maxResult);
         JSONArray jSONArray = new JSONArray();
         for (Item item : items) {
